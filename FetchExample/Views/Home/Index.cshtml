@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div>Select a County:</div>
+    <select id="counties"></select>
+
+
+    <div>Cities:</div>
+    <select id="cities"></select>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            loadCounties();
+
+            $("#counties").change(() => {
+                var selectedCounty = $("#counties").val();
+                clearCities();
+                loadCitiesFor(selectedCounty);
+            });
+        });
+
+        function loadCounties() {
+            fetch('/County/GetCounties')
+                .then((response) => response.json())
+                .then((counties) => {
+                    loadValuesIntoDropdown('#counties', counties);
+                });
+        }
+
+        function loadCitiesFor(countyName) {
+            fetch('/County/GetCitiesInCounty?countyName=' + countyName)
+                .then((response) => response.json())
+                .then((counties) => {
+                    loadValuesIntoDropdown('#cities', counties);
+                });
+        }
+
+        function clearCities() {
+            $("#cities").empty();
+        }
+
+        function loadValuesIntoDropdown(selector, values) {
+            $.each(values, function () {
+                $(selector).append($("<option />").val(this).text(this));
+            });
+        }
+    </script>
+}
