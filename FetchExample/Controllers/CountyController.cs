@@ -26,6 +26,15 @@ namespace FetchExample.Controllers
                     new City("Elyria"),
                     new City("Oberlin"),
                 }
+            },
+            new County ("Lucas")
+            {
+                Cities = new List<City>
+                {
+                    new City("Toledo"),
+                    new City("Holland"),
+                    new City("Sylvania"),
+                }
             }
         };
 
