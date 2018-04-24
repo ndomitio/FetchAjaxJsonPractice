@@ -10,8 +10,11 @@
 
 </div>
 <div class="row">
-    <div>Select a School:</div>
-    <select id="schools"></select>
+    <div>Select a Continent:</div>
+    <select id="continents"></select>
+
+    <div>Select a Country:</div>
+    <select id="countries"></select>
 
 
 </div>
@@ -47,6 +50,37 @@
         function clearCities() {
             $("#cities").empty();
         }
+
+        $(function () {
+            loadContinents();
+
+            $("#continents").change(() => {
+                var selectedContinent = $("#continents").val();
+                clearCountries();
+                loadCountriesFor(selectedContinent);
+            });
+        });
+
+        function loadContinents() {
+            fetch('/Continents/GetContinents')
+                .then((response) => response.json())
+                .then((continents) => {
+                    loadValuesIntoDropdown('#continents', continents);
+                });
+        }
+
+        function loadCountriesFor(continentName) {
+            fetch('/Continent/GetCountriesInContinent?continentName=' + continentName)
+                .then((response) => response.json())
+                .then((continents) => {
+                    loadValuesIntoDropdown('#countries', continents);
+                });
+        }
+
+        function clearCountries() {
+            $("#countries").empty();
+        }
+
 
         function loadValuesIntoDropdown(selector, values) {
             $.each(values, function () {
