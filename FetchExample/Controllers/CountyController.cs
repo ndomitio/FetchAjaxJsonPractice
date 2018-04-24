@@ -38,25 +38,13 @@ namespace FetchExample.Controllers
             }
             
         };
-        private List<School> schools = new List<School>
-        {
-            new School ("Gesu"),
-            new School ("Central Catholic"),
-            new School ("UT")
-        };
-
-
+        
         public JsonResult GetCounties()
         {
             var countyNames = counties.Select(c => c.Name);
             return Json(countyNames, JsonRequestBehavior.AllowGet) ;
         }
-        public JsonResult GetSchools()
-        {
-            var schoolNames = schools.Select(s => s.Name);
-            return Json(schoolNames, JsonRequestBehavior.AllowGet);
-        }
-
+        
 
         public JsonResult GetCitiesInCounty(string countyName)
         {
@@ -67,13 +55,5 @@ namespace FetchExample.Controllers
 
     }
 
-    public class School
-    {
-        public School(string name)
-        {
-            Name = name;
-        }
-        public List<Mascot> Mascots { get; set; }
-        public string Name { get; set; }
-    }
+    
 }
