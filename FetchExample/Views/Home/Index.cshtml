@@ -8,14 +8,15 @@
     <div>Cities:</div>
     <select id="cities"></select>
 
-</div>
-<div class="row">
     <div>Select a Continent:</div>
     <select id="continents"></select>
 
     <div>Select a Country:</div>
     <select id="countries"></select>
 
+</div>
+<div class="row">
+    
 
 </div>
 
@@ -62,7 +63,7 @@
         });
 
         function loadContinents() {
-            fetch('/Continents/GetContinents')
+            fetch('/Continent/GetContinents')
                 .then((response) => response.json())
                 .then((continents) => {
                     loadValuesIntoDropdown('#continents', continents);
